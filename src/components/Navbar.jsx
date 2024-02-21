@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
@@ -9,7 +10,7 @@ function Navbar() {
         </div>
         <div className="w-[40%] hidden font-semibold text-xl md:block">
           <ul className="flex items-center justify-around">
-            <li>HOME</li>
+            <li><Link to="/">HOME</Link></li>
             <li>PROFILE</li>
             <li>POST</li>
           </ul>
@@ -21,7 +22,7 @@ function Navbar() {
             <div className="h-full w-full flex items-center justify-between">
               {" "}
               <button className="text-lg bg-white px-2 py-1 border rounded-md sm:px-4 sm:py-2 sm:text-xl">
-                Login
+                <Link to="/login" > Login </Link>
               </button>
               <button
                 className="text-lg bg-green-600 px-2 py-1 text-white border rounded-md
