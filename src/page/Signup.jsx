@@ -2,10 +2,6 @@ import React, { useState } from "react";
 
 function Signup() {
   const [user, setUser] = useState({});
-  const [name,setName] = useState("")
-  const [email,setEmail] = useState("")
-  const [password,setPassword] = useState("")
-  console.log(user)
   return (
     <div className="bg-slate-200">
       <div className="max-w-7xl min-h-[90dvh] m-auto flex items-center justify-center">
@@ -13,12 +9,8 @@ function Signup() {
           className="min-h-[400px] w-[90%] max-w-[700px] shadow-lg rounded-md bg-slate-100 px-6 py-2 flex flex-col items-center justify-around"
           onSubmit={(e) => {
             e.preventDefault()
-            console.log(name)
-            setUser({
-                name,
-                email,
-                password
-            })
+            console.log(user)
+            
           }}
         >
           <div className="text-lg flex items-center justify-between w-full">
@@ -29,7 +21,10 @@ function Signup() {
               className="border-none outline-none rounded-sm px-2 py-1 w-[80%]"
               required
               onChange={(e) => {
-                setName(e.target.value)
+                setUser({
+                  ...user,
+                  name : e.target.value
+                })
               }}
             />
           </div>
@@ -41,7 +36,10 @@ function Signup() {
               className="border-none outline-none rounded-sm px-2 py-1 w-[80%]"
               required
               onChange={(e) => {
-                setEmail(e.target.value)
+                setUser({
+                  ...user,
+                  email : e.target.value
+                })
               }}
             />
           </div>
@@ -53,7 +51,10 @@ function Signup() {
               className="border-none outline-none rounded-sm px-2 py-1 w-[80%]"
               required
               onChange={(e) => {
-                setPassword(e.target.value)
+                setUser({
+                  ...user,
+                  password : e.target.value
+                })
               }}
             />
           </div>
