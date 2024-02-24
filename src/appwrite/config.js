@@ -13,7 +13,7 @@ export class Service {
         this.databases = new Databases(this.client)
         this.bucket = new Storage(this.client)
     }
-    async createPost({title,slug,content,featuredImage,status,userId}){
+    async createPost({ title, slug, content, featuredImage, status, userId }) {
         try {
             return await this.databases.createDocument(
                 conf.appwriteDatabaseId,
@@ -31,7 +31,7 @@ export class Service {
             throw err
         }
     }
-    async updatePost({title,slug,content,featuredImage,status}) {
+    async updatePost(slug, { title, content, featuredImage, status }) {
         try {
             return await this.databases.updateDocument(
                 conf.appwriteDatabaseId,
@@ -73,20 +73,21 @@ export class Service {
             throw err
         }
     }
-    
+
     async getPosts() {
         try {
             return await this.databases.listDocuments(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
                 [
-                    Query.equal("status","active")
+                    Query.equal("status", "active")
                 ]
             )
         } catch (err) {
             throw err
         }
     }
+
     async uploadFile(file) {
         try {
             return await this.bucket.createFile(
@@ -94,6 +95,22 @@ export class Service {
                 ID.unique(),
                 file
             )
+        } catch (err) {
+            throw err
+        }
+    }
+
+    async deleteFile(fileID) {
+        try {
+            return await this.bucket.deleteFile(conf.appwriteBucketId, fileID)
+        } catch (err) {
+            throw err
+        }
+    }
+
+    getFilePreview(fileID) {
+        try {
+           return this.bucket.getFilePreview(conf.appwriteBucketId,fileID) 
         } catch (err) {
             throw err
         }

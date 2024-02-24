@@ -21,15 +21,15 @@ function Navbar() {
           ) : (
             <div className="h-full w-full flex items-center justify-between">
               {" "}
-              <button className="text-lg bg-white px-2 py-1 border rounded-md sm:px-4 sm:py-2 sm:text-xl">
-                <Link to="/login" > Login </Link>
-              </button>
-              <button
+              <Link to="/login" ><button className="text-lg bg-white px-2 py-1 border rounded-md sm:px-4 sm:py-2 sm:text-xl hover:bg-slate-50">
+                 Login 
+              </button></Link>
+              <Link to="/signup"><button
                 className="text-lg bg-green-600 px-2 py-1 text-white border rounded-md
         sm:px-4 sm:py-2 sm:text-xl"
               >
                 SignUp
-              </button>{" "}
+              </button>{" "}</Link>
             </div>
           )}
         </div>
