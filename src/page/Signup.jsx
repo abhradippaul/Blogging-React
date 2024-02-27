@@ -1,7 +1,10 @@
+import authService from "@/appwrite/auth";
 import React, { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 function Signup() {
+  // const {setUser} = useUserContext()
   const [user, setUser] = useState({});
+  const navigate = useNavigate()
   return (
     <div className="bg-slate-200">
       <div className="max-w-7xl min-h-[90dvh] m-auto flex items-center justify-center">
@@ -9,8 +12,11 @@ function Signup() {
           className="min-h-[400px] w-[90%] max-w-[700px] shadow-lg rounded-md bg-slate-100 px-6 py-2 flex flex-col items-center justify-around"
           onSubmit={(e) => {
             e.preventDefault()
+            authService.createAccount(user).then(() => {
+
+              navigate("/")
+            })
             console.log(user)
-            
           }}
         >
           <div className="text-lg flex items-center justify-between w-full">

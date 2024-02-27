@@ -74,14 +74,12 @@ export class Service {
         }
     }
 
-    async getPosts() {
+    async getPosts(query) {
         try {
             return await this.databases.listDocuments(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
-                [
-                    Query.equal("status", "active")
-                ]
+                query
             )
         } catch (err) {
             throw err

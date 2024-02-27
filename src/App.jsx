@@ -5,9 +5,11 @@ import Home from "./page/Home";
 import Login from "./page/Login";
 import Signup from "./page/Signup";
 import { UserContextProvider } from "./context/UserContext";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import authService from "./appwrite/auth";
+import Post from "./page/Post";
+import Blog from "./components/Blog";
+import Profile from "./page/Profile";
 
 function App() {
   const [user, setUser] = useState({});
@@ -18,10 +20,12 @@ function App() {
     authService
       .getCurrentUser()
       .then((data) => {
-        setUser({
-          name : "test"
-        });
+        setUser(data);
+        setStatus(true)
         // console.log(data);
+      }).catch(() => {
+          setUser({})
+          setStatus(false)
       })
       .finally(() => setLoading(false));
       setStatus(false)
@@ -38,6 +42,9 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/post" element={<Post />} />
+        <Route path="/post/blog" element={<Blog />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </UserContextProvider>
   );

@@ -21,6 +21,7 @@ export class AuthService {
             throw err
         }
     }
+    
     async login({ email, password }) {
         try {
             return await this.account.createEmailSession(email, password)
@@ -31,7 +32,7 @@ export class AuthService {
 
     async logout() {
         try {
-            return await this.account.deleteSession()
+            return await this.account.deleteSessions()
         } catch (err) {
             throw err
         }
