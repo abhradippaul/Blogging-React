@@ -16,7 +16,7 @@ function PostBlog() {
   return (
     <div className='w-full h-full px-4 flex justify-around flex-wrap'>
         {
-          postArr.map((e) => <ContentCard key={e.$id}/>)
+          postArr.map((e) => <ContentCard value={e} key={e.$id}/>)
         }
     </div>
   )
