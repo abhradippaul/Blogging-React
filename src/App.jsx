@@ -10,6 +10,7 @@ import authService from "./appwrite/auth";
 import Post from "./page/Post";
 import Blog from "./components/Blog";
 import Profile from "./page/Profile";
+import ContentInfoCard from "./components/ContentInfoCard";
 
 function App() {
   const [user, setUser] = useState({});
@@ -45,6 +46,7 @@ function App() {
         <Route path="/post" element={<Post />} />
         <Route path="/post/blog" element={<Blog />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/v1/posts/:id" element={<ContentInfoCard />} />
       </Routes>
     </UserContextProvider>
   );
