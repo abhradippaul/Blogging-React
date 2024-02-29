@@ -4,11 +4,10 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Blog() {
-  const [edit, setEdit] = useState(false);
   const { user, status } = useUserContext();
   const [formInfo, setFormInfo] = useState({});
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   if (status) {
     return (
       <div className="bg-slate-200 min-h-dvh border max-w-7xl m-auto">
@@ -18,19 +17,18 @@ function Blog() {
           onSubmit={async (e) => {
             e.preventDefault();
             setLoading(false);
-            if (!edit) {
-              const imageData = await service.uploadFile(
-                document.getElementById("image").files[0]
-              );
-              service.createPost({
-                ...formInfo,
-                userId: `${user.$id}`,
-                featuredImage: `${imageData.$id}`,
-              });
-              setLoading(true);
-              navigate("/post")
-              setFormInfo({})
-            }
+            const imageData = await service.uploadFile(
+              document.getElementById("image").files[0]
+            );
+            service.createPost({
+              ...formInfo,
+              userId: `${user.$id}`,
+              featuredImage: `${imageData.$id}`,
+              userName : user.name
+            });
+            setLoading(true);
+            navigate("/post");
+            setFormInfo({});
           }}
         >
           <div className="w-full flex items-center justify-between text-xl my-4">
@@ -39,7 +37,6 @@ function Blog() {
               type="text"
               id="title"
               required
-              readOnly={edit}
               value={formInfo.title}
               onChange={(e) => {
                 setFormInfo({
@@ -64,7 +61,6 @@ function Blog() {
                   slug: e.target.value,
                 });
               }}
-              readOnly={edit}
               className="bg-slate-200 border-none outline-none w-[70%] p-1"
             />
           </div>
@@ -74,7 +70,6 @@ function Blog() {
               type="text"
               rows={10}
               cols={50}
-              readOnly={edit}
               onChange={(e) => {
                 setFormInfo({
                   ...formInfo,

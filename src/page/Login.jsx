@@ -2,12 +2,14 @@ import authService from "@/appwrite/auth";
 import { useUserContext } from "@/context/UserContext";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import spinner from "/spinner.gif"
 
 function Login() {
   const {setUser,setStatus} = useUserContext()
   const navigate = useNavigate()
   const [loginDetails,setLoginDetails] = useState({})
   const [loading,setLoading] = useState(true)
+  const [error,setError] = useState("")
   return (
     <div className=" bg-slate-200">
       <div className="min-h-[90dvh] flex items-center justify-evenly flex-col">
@@ -24,10 +26,11 @@ function Login() {
               setStatus(true)
               navigate("/")
             })
+          }).catch((err) => {
+            setError(err.message)
           }).finally(() => {
             setLoading(true)
           })
-          // console.log(loginDetails)
         }}>
           <div className="w-full flex items-center justify-between text-lg">
             <label htmlFor="email">Email : </label>
@@ -60,10 +63,11 @@ function Login() {
               className="bg-slate-100 w-[80%] outline-none rounded-sm px-2 py-1"
             />
           </div>
-          <button className="text-xl bg-green-500 text-white w-1/2 py-2 rounded-md hover:bg-green-600" onClick={() => {
+          {error ? <h1 className="text-red-700">{error}</h1> : <h1></h1>}
+          <button className="text-xl bg-green-500 text-white w-1/2 py-2 rounded-md hover:bg-green-600 flex items-center justify-center" onClick={() => {
             
           }}>
-            {loading? "Submit" : "Loading..."}
+            {loading? "Submit" : <img className="h-8" src={spinner} />}
           </button>
         </form>
       </div>

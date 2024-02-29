@@ -14,7 +14,7 @@ function ContentInfoCard() {
             const featuredImage = service.getFilePreview(e.featuredImage)
             setData({
                 ...e,
-                featuredImage
+                imageUrl : featuredImage
             })
         })
     },[])
