@@ -1,6 +1,6 @@
 import authService from "@/appwrite/auth";
 import { useUserContext } from "@/context/UserContext";
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 function Navbar() {
@@ -11,6 +11,9 @@ function Navbar() {
       setStatus(false)
     })
   }
+  useEffect(() => {
+
+  },[user,status])
   return (
     <div className="max-w-7xl m-auto">
       <div className="h-[10dvh] flex items-center justify-between p-4">
@@ -33,7 +36,7 @@ function Navbar() {
           </ul>
         </div>
         <div className="h-full w-[50%] max-w-60 flex items-center justify-center">
-          {status ? (
+          {status&&user?.name ? (
             <div className="h-full w-full flex items-center justify-between">
               <h1 className="text-lg sm:text-xl">Welcome {user.name}</h1>
               <button className="text-lg bg-white px-2 py-1 border rounded-md sm:px-4 sm:py-2 sm:text-xl hover:bg-slate-50" onClick={logoutBtn}>

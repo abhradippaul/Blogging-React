@@ -7,7 +7,9 @@ function Blog() {
   const { user, status } = useUserContext();
   const [formInfo, setFormInfo] = useState({});
   const [loading, setLoading] = useState(true);
+  const [error,setError] = useState("")
   const navigate = useNavigate();
+  // console.log(user.name)
   if (status) {
     return (
       <div className="bg-slate-200 min-h-dvh border max-w-7xl m-auto">
@@ -25,10 +27,13 @@ function Blog() {
               userId: `${user.$id}`,
               featuredImage: `${imageData.$id}`,
               userName : user.name
-            });
-            setLoading(true);
-            navigate("/post");
-            setFormInfo({});
+            }).then(() => {
+              setLoading(true);
+              navigate("/post");
+            }).catch((err) => {
+              setError(err.message)
+              setLoading(true);
+            })
           }}
         >
           <div className="w-full flex items-center justify-between text-xl my-4">
@@ -85,6 +90,7 @@ function Blog() {
           <div className="w-full flex items-center justify-between text-xl my-4">
             <input type="file" id="image" required />
           </div>
+          {error ? <h1 className="text-red-600 text-xl">{error}</h1> : <h1></h1>}
           <button className="bg-green-500 w-1/2 text-xl text-white px-4 py-1 rounded-md hover:bg-green-600">
             {loading ? "Submit" : "Loading...."}
           </button>

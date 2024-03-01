@@ -102,7 +102,7 @@ function EditBlog({ data }) {
             </button>
           </div>
         ) : (
-          <div>Created By : ......</div>
+          <div>Created By : {user.name}</div>
         )}
       </div>
     </div>
